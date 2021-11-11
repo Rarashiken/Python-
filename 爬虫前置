@@ -1,0 +1,18 @@
+1.Https比Http更安全，但是性能更低
+
+2.常见的请求头
+请求头
+host                          域名
+Connection                    长链接
+Upgrade-Insecure-Requests     升级为Https
+* User-Agent                  用户代理，提供系统信息
+* Referer                     页面跳转处，防盗用
+* Cookie                      状态保持
+
+响应头
+ Set-cookie
+
+状态响应码：
+
+503：有可能因为爬虫频繁访问url，使服务器忽视爬虫请求，最终返回503.
+
