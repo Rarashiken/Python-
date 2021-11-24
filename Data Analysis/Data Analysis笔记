@@ -1,0 +1,88 @@
+数据解析：
+	·编码流程：
+		- 指定url
+		- 发起请求
+		- 获取相应数据
+		- 数据解析
+		- 持久化存储
+
+	·实现：
+		- 正则
+		- bs4
+		- xpath
+
+	·原理概述：
+		-解析的局部的文本内容都会在标签之间或者标签对应的属性中进行存储
+		-1. 进行指定标签的定位
+		-2. 标签或者标签对应的属性中存储的数据值进行提取
+	
+	·正则：
+	-常用正则表达式：
+		-单字符：
+			. : 除换行以外所有的字符 
+				##匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 \. 。
+			[] :[aoe] [a-w] 匹配集合中任意一个字符
+			\d : 数字【0-9】
+			\D : 非数字
+			\w : 数字，字母，下划线，中文
+			\W: 非\w
+			\s : 所有的空白字符，包括空格/制表符/换页符等等。等价于[ \f \n \r \t \v]
+			\s : 非空白
+		-数量修饰：<修饰的是前一个字符>
+			* : 任意多次 >=0
+			+ : 至少一次 >=1
+			? : 可有可无 0次or1次
+			{m} : 固定m次 hello{3, }
+			{m, } : 至少m次
+			{m,n} : m-n次
+		-边界：
+			$ : 以某某某结尾
+			^ : 以某某某开头
+		-分组：
+			（ab）
+		-贪婪模式： .*
+		-非贪婪（惰性）模式： .*?
+		-re.I ：忽略大小写
+		-re.M  ：多行匹配
+		-re.S ：单行匹配 ##将整个字符串作为一行进行匹配
+		-re.sub (正则表达式，替换内容，字符串）
+
+练习：
+key = "javapythonc++php"
+p = re.findall(‘python',key)[0] #[0]为去掉输出的引号和括号
+print(p)
+
+url = 'http://download.tensorflow.org/models/imagenet/inception-2015-12-05.tgz'
+filename = url.split('/')[-1]  #以‘/ ’为分割f符，保留最后一段
+结果是：inception-2015-12-05.tgz·bs4：
+	-原理：
+		1. 实例化一个BeautifuSoup对象，并且将页面源码数据加载到该对象中
+		2. 通过调用BeautifuSoup对象中相关的属性或者方法进行标签定位和数据提取 
+	- 需求环境：
+		1. Bs4
+		2. lxml
+	-实例化：
+		- bs4的实例化： from bs4 import BeautifulSoup
+		- 对象的实例化： 
+			1. 将本地的html文档中的数据加载到该对象中
+				fp = open('./test.html' , 'r' , encoding='utf-8')
+   				soup = BeautifulSoup(fp,’lxml')
+
+			2. 将互联网上获取的页面源码加载到该对象中
+				page_text = response.text
+				soup = BeautifulSoup(page_text, ’lxml’)
+		- 提供的用于数据解析的方法和属性：
+			- soup.tagName：返回的是html中第一次出现的tagName标签 
+			- soup.find() : 
+				- soup.find(‘div’) 等同于 soup.div
+				- 属性定位：
+					- soup.find('div', class_= ‘dzpzmain')
+				输出这个div内的全部内容
+			- soup.find_all(): 找到符合标准的所有标签(列表形式）
+			- select() : print(soup.select(‘.某种选择器（id,class,标签……）’))
+				返回的是一个列表
+				print(soup.select('.hzbscbox >div >div >div > span   ')[0])
+				返回层级中的第一个span元素
+
+
+				
