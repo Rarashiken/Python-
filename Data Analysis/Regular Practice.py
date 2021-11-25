@@ -8,7 +8,7 @@ key = "<html><h1>hello world<h1><html>"
 p = re.findall('<h1>(.*)<h1>',key)[0]
 print(p)
 
-string = '我喜欢身高158的女孩'
+string = '我喜欢的女孩身高158'
 p = re.findall('\d+', string)
 print(p)
 
